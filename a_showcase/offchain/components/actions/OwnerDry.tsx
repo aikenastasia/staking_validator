@@ -130,7 +130,11 @@ export default function OwnerDry(props: { onLock: Action; onUnlock: Action; onDe
                       ${isDRepCredential(dRep) && dRepID && !dRepCredentialHash && "invisible"}`}
                       isDisabled={isDRepCredential(dRep) && !dRepCredentialHash}
                       radius="full"
-                      onPress={() => onDelegateStake({ poolID, dRep }).then(onClose)}
+                      onPress={() =>
+                        onDelegateStake({ poolID, dRep })
+                          .then(onClose)
+                          .finally(() => setDrep(AlwaysAbstain))
+                      }
                     >
                       Submit
                     </Button>

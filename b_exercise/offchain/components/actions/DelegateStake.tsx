@@ -82,7 +82,11 @@ export default function DelegateStakeButton(props: { onSubmit: Action }) {
                       ${isDRepCredential(dRep) && dRepID && !dRepCredentialHash && "invisible"}`}
                     isDisabled={isDRepCredential(dRep) && !dRepCredentialHash}
                     radius="full"
-                    onPress={() => onSubmit({ poolID, dRep }).then(onClose)}
+                    onPress={() =>
+                      onSubmit({ poolID, dRep })
+                        .then(onClose)
+                        .finally(() => setDrep(AlwaysAbstain))
+                    }
                   >
                     Submit
                   </Button>

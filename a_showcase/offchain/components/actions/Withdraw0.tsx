@@ -331,7 +331,12 @@ export default function Withdraw0(props: {
                       ${isDRepCredential(dRep) && dRepID && !dRepCredentialHash && "invisible"}`}
                       isDisabled={isDRepCredential(dRep) && !dRepCredentialHash}
                       radius="full"
-                      onPress={() => onDelegateStake({ poolID, dRep }).then(onClose).catch(onError)}
+                      onPress={() =>
+                        onDelegateStake({ poolID, dRep })
+                          .then(onClose)
+                          .catch(onError)
+                          .finally(() => setDrep(AlwaysAbstain))
+                      }
                     >
                       Submit
                     </Button>
